@@ -1,0 +1,7 @@
+{
+  "broker": "localhost",
+  "port": 1883,
+  "topic": "python/mqtt/almos723",
+  "username": "test",
+  "password": "teszt2"
+}

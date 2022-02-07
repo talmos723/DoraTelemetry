@@ -1,0 +1,34 @@
+{
+  "layout": [2,2],
+  "updateperiod": 400,
+   "plotting":[
+     {
+       "name": "Time",
+       "ylim": [0,15000],
+       "type": "line",
+       "sample_num": 10,
+       "subtopic": "esp8266"
+     },
+     {
+       "name": "distanceCM",
+       "ylim": [0,500],
+       "type": "line",
+       "sample_num": 10,
+       "subtopic": "esp8266"
+     },
+     {
+       "name": "resultCM",
+       "ylim": [0,250],
+       "type": "line",
+       "sample_num": 10,
+       "subtopic": "esp8266"
+     },
+     {
+       "name": "Facing",
+       "ylim": [0,10],
+       "type": "compass",
+       "sample_num": 10,
+       "subtopic": "facing"
+     }
+]
+}
