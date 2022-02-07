@@ -4,7 +4,7 @@ from communication.ComModul import ComModul
 from communication.ComMenu import ComMenu
 
 
-class ComSystem:    #TODO: ComSystem gets the ComMenu and the ComModul and handles them
+class ComSystem:
     def __init__(self, root: Tk, dataholders, commod: ComModul = None):
         self.commod = commod
         self.commenu = ComMenu(root, self.commod, self, dataholders)

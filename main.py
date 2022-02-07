@@ -29,8 +29,6 @@ class MyGUI(tkinter.Tk):
         except:
             self.receiver = None'''
 
-        #TODO: ComSystem
-
         # self.receiver: ComModul = None  # MqttListener(self.dataholders, "mqtt_connect")
         self.comsys = ComSystem(self, self.dataholders)
 
