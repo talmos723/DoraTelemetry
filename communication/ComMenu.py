@@ -16,15 +16,12 @@ class ComMenu(tkinter.Menu):
 
         self.variable = tkinter.StringVar()
         self.win = None
-        self.comForms = ['MQTT', 'NONE']
+        self.comForms = ["MQTT", "SERIAL", "NONE"]
 
         self.filemenu = None
         self.buildFileMenu()
 
         self.add_cascade(label="Communication", menu=self.filemenu)
-
-    def donothing(self):
-        print("asd")
 
     def display_selected(self, choice):
         choice = self.variable.get()
@@ -51,6 +48,10 @@ class ComMenu(tkinter.Menu):
         if self.variable.get() == self.comForms[0]:  # mqtt
             MqttMenu(self.comSys, self.dataholder).mqttPopup()
             # print("-------COMMOD IS NOW MQTT!-------")
+
+        elif self.variable.get() == self.comForms[1]:  # serial
+            self.comSys.newCom(None)
+            # print("-------COMMOD IS NOW SERIAL!-------")
 
         elif self.variable.get() == self.comForms[1]:  # none
             self.comSys.newCom(None)

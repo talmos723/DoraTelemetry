@@ -3,21 +3,21 @@
   "updateperiod": 400,
    "plotting":[
      {
-       "name": "Time",
-       "ylim": [0,15000],
+       "name": "Humidity",
+       "ylim": [0,100],
        "type": "line",
        "sample_num": 10,
        "subtopic": "esp8266"
      },
      {
-       "name": "distanceCM",
-       "ylim": [0,500],
+       "name": "Temperature",
+       "ylim": [-10,50],
        "type": "line",
        "sample_num": 10,
        "subtopic": "esp8266"
      },
      {
-       "name": "resultCM",
+       "name": "Distance",
        "ylim": [0,250],
        "type": "line",
        "sample_num": 10,

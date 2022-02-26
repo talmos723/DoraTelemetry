@@ -1,1 +1,1 @@
-/usr/local/sbin/mosquitto -c       /usr/local/etc/mosquitto/mosquitto.conf -v
+/usr/local/sbin/mosquitto -c       /Users/talmos/python/DoraTelemetry/settings/mqtt/mosquitto.conf -v

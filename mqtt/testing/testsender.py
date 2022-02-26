@@ -16,13 +16,13 @@ class MqttSender(MqttClient):
             print("Failed to connect, return code %d\n", rc)
 
     def run(self):
-        num = 250
+        num = 100
         while self.running:
-            self.publish(f"{num}/esp8266/resultCM")
+            self.publish(f"{num}/esp8266/Humidity")
             time.sleep(self.seconds)
             num -= 5
             if num < 0:
-                num = 250
+                num = 100
 
     def stop(self):
         self.running = False

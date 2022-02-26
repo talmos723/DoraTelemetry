@@ -16,9 +16,11 @@ class MqttMenu:
         self.comSys = comSys
         self.dataholder = dataholder
 
-        self.saved = os.listdir("./settings/mqtt")
-        for i in range(len(self.saved)):
-            self.saved[i] = self.saved[i].replace(".json", "")
+        self.saved = []
+        files = os.listdir("./settings/mqtt")
+        for i in range(len(files)):
+            if files[i].find(".json") != -1:
+                self.saved.append(files[i].replace(".json", ""))
         self.saved.append("New")
 
         self.keys = ["broker", "port", "topic", "username", "password"]
@@ -40,7 +42,7 @@ class MqttMenu:
             mqttDatas = mqttInit(choice)
         else:
             mqttDatas = None
-            self.entries = [tkinter.Entry() for i in range(len(self.keys)+1)]
+            self.entries = [tkinter.Entry() for i in range(len(self.keys) + 1)]
             tkinter.Label(self.dataFrame, text="Name").grid(row=row, column=0, sticky=tkinter.E)
             tkinter.Label(self.dataFrame, text=":").grid(row=row, column=1, sticky=tkinter.W)
             self.entries[row] = tkinter.Entry(self.dataFrame)
@@ -92,7 +94,7 @@ class MqttMenu:
         if self.comDetails.get() == "New":
             newConnection = {}
             for key in range(len(self.keys)):
-                newConnection[self.keys[key]] = self.entries[key+1].get()
+                newConnection[self.keys[key]] = self.entries[key + 1].get()
 
             newConnection["port"] = int(newConnection["port"])
             mqttSave(self.entries[0].get(), newConnection)

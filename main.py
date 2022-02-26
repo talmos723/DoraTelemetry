@@ -14,7 +14,7 @@ from video.PlayerFrame import PlayerFrame
 class MyGUI(tkinter.Tk):
     def __init__(self, test_send_process_on = False):
         tkinter.Tk.__init__(self)
-        self.title('Sleepy Diagnostics')
+        self.title('Dora Telemetry')
 
         self.tabs = None
         self.menubar = None
@@ -22,14 +22,6 @@ class MyGUI(tkinter.Tk):
         self.plot_rec = plotInit()
         self.dataholders = build_dataholders(self.plot_rec)
 
-        '''try:
-            self.receiver = MqttListener(self.dataholders, "mqtt_connect")
-            recieverThread = threading.Thread(target=self.receiver.run())
-            recieverThread.start()
-        except:
-            self.receiver = None'''
-
-        # self.receiver: ComModul = None  # MqttListener(self.dataholders, "mqtt_connect")
         self.comsys = ComSystem(self, self.dataholders)
 
         self.init_gui()
@@ -59,8 +51,6 @@ class MyGUI(tkinter.Tk):
 
         self.tabs.pack(side=tkinter.LEFT, expand=True, fill=tkinter.BOTH)
 
-        '''self.menubar = ComMenu(root=self, commod=self.receiver, dataholder=self.dataholders)
-        self.config(menu=self.menubar)'''
 
     def on_closing(self):
         if self.testSendProcess is not None:
