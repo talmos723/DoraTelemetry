@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import ttk
 
-from video.VideoFrame import VideoFrame
+from Frames.VideoFrame import VideoFrame
 
 
 class PlayerFrame(tkinter.Frame):

@@ -1,3 +1,4 @@
+import logging
 import os
 import tkinter
 import tkinter.messagebox
@@ -9,6 +10,8 @@ from settings.init_settings import mqttInit, mqttSave
 
 class MqttMenu:
     def __init__(self, comSys, dataholder):
+        self.logger = logging.getLogger('robotlog')
+
         self.comDetails = tkinter.StringVar()
         self.win = None
         self.dataFrame = None
@@ -104,6 +107,7 @@ class MqttMenu:
             self.comSys.newCom(MqttListener(self.dataholder, self.comDetails.get()))
             self.win.destroy()
         except Exception as e:
+            self.logger.warning(f"MQTT connection error!")
             tkinter.messagebox.showwarning(
                 title="Error",
                 message=f"Connection error!\nCaused by:\n{e}")
