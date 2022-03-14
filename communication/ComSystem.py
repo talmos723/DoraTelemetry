@@ -4,9 +4,10 @@ from communication.ComModul import ComModul
 from communication.ComMenu import ComMenu
 
 
-# TODO: additional menus with the commonication moduls (like subscribe tot topic with mqtt)
+# TODO: additional menus with the commonication moduls (like subscribe to topic with mqtt)
 # TODO: additional menu interfaces
 # TODO: communication on serial port
+# TODO: the communication settings are displayed and managed on an other tab except in menus
 class ComSystem:
     def __init__(self, root: Tk, dataholders, commod: ComModul = None):
         self.commod = commod
