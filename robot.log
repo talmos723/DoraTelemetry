@@ -1,0 +1,9 @@
+2022-03-14 21:10:38,049 - robotlog - WARNING - Program start
+2022-03-14 21:10:38,049 - robotlog - INFO - Logging is alive
+2022-03-14 21:10:44,185 - robotlog - DEBUG - -------MQTT LISTENER STARTED-------
+2022-03-14 21:10:44,185 - robotlog - INFO - RECIEVER -- Connected to MQTT Broker!
+2022-03-14 21:10:44,607 - robotlog - INFO - Received `75/esp8266/Humidity` from `python/mqtt/almos723` topic
+2022-03-14 21:10:45,708 - robotlog - INFO - Received `70/esp8266/Humidity` from `python/mqtt/almos723` topic
+2022-03-14 21:10:46,723 - robotlog - INFO - Received `65/esp8266/Humidity` from `python/mqtt/almos723` topic
+2022-03-14 21:10:47,646 - robotlog - INFO - Received `60/esp8266/Humidity` from `python/mqtt/almos723` topic
+2022-03-14 21:10:48,365 - robotlog - WARNING - Application closed
