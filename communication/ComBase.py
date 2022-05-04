@@ -1,7 +1,7 @@
 import abc
 
 
-class ComModul(metaclass=abc.ABCMeta):
+class ComBase(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def connect(self):
         raise NotImplementedError

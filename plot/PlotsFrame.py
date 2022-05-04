@@ -6,6 +6,7 @@ from matplotlib.figure import Figure
 import matplotlib.animation as animation
 
 import plot.LineDiagram
+from communication import ComSystem
 
 default = {
   "layout": [1,2],
@@ -24,7 +25,7 @@ default = {
 }
 
 class PlotsFrame(tkinter.Frame):
-    def __init__(self, parent, dataholders, recipe: dict):
+    def __init__(self, parent, recipe: dict):
         tkinter.Frame.__init__(self, parent)
         self.parent = parent
 
@@ -32,9 +33,6 @@ class PlotsFrame(tkinter.Frame):
             self.recipe = default
         else:
             self.recipe = recipe
-
-        self.dataholders = dataholders
-
 
         self.fig = Figure(figsize=(10, 8))
         self.canvas = FigureCanvasTkAgg(self.fig, master=self)
@@ -57,7 +55,7 @@ class PlotsFrame(tkinter.Frame):
                     ax.set_yticklabels([])
                 else:
                     ax = self.fig.add_subplot(layout[0], layout[1], idx+1)
-                    line = plot.LineDiagram.LineDiagram(subplot=ax, dataholder=self.dataholders[plot_rec["subtopic"]][plot_rec["name"]], rec=plot_rec)
+                    line = plot.LineDiagram.LineDiagram(subplot=ax, dataholder=ComSystem.ComSystem.getInstance().Dataholders[plot_rec["subtopic"]][plot_rec["name"]], rec=plot_rec)
                     self.lines.append(line)
 
         self.ani = matplotlib.animation.FuncAnimation(self.fig, self.update_view, interval=self.recipe["updateperiod"], blit=False)

@@ -5,9 +5,8 @@ from tkinter import ttk
 
 from Frames.ControlFrame import ControlFrame
 from communication.ComSystem import ComSystem
-from dataholders.initDhs import build_dataholders
 
-from mqtt.testing.testsender import testrun
+from mqttModul.MqttSender import testrun, testrun2
 from settings.init_settings import *
 from Frames.TelemetryFrame import TelemetryFrame
 from Frames.PlayerFrame import PlayerFrame
@@ -24,22 +23,20 @@ class MyGUI(tkinter.Tk):
         self.tabs = None
         self.menubar = None
 
-        self.plot_rec = plotInit()
-        self.dataholders = build_dataholders(self.plot_rec)
-
-        self.comsys = ComSystem(self, self.dataholders)
+        comsys = ComSystem(self)
 
         self.init_gui()
 
         if test_send_process_on:
-            with open("settings/mqtt/mqtt_connect_sender.json") as f:
-                mqtt_sender_rec = json.load(f)
-            self.testSendProcess = multiprocessing.Process(target=testrun, args=(mqtt_sender_rec, 1, "sender"))
+            self.testSendProcess = multiprocessing.Process(target=testrun)
             self.testSendProcess.start()
+            self.testSendProcess2 = multiprocessing.Process(target=testrun2)
+            self.testSendProcess2.start()
         else:
             self.testSendProcess = None
+            self.testSendProcess2 = None
 
-        logging.info("  ASD  ")
+        self.logger.info('Program started')
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.mainloop()
 
@@ -50,7 +47,7 @@ class MyGUI(tkinter.Tk):
         self.logger.addHandler(tab1.log.appLogHandler)
 
         tab2 = PlayerFrame(parent=self.tabs, video_name="./video/baby_dog16.mp4")
-        tab3 = TelemetryFrame(parent=self.tabs, dataholders=self.dataholders, recipe=self.plot_rec)
+        tab3 = TelemetryFrame(parent=self.tabs)
         self.tabs.add(tab1, text='Controls')
         self.tabs.add(tab2, text='Video')
         self.tabs.add(tab3, text='Charts')
@@ -61,6 +58,8 @@ class MyGUI(tkinter.Tk):
     def on_closing(self):
         if self.testSendProcess is not None:
             self.testSendProcess.kill()
+        if self.testSendProcess2 is not None:
+            self.testSendProcess2.kill()
 
         self.logger.warning('Application closed')
         self.destroy()
@@ -82,7 +81,6 @@ class MyGUI(tkinter.Tk):
         # self.logger.addHandler(console_handler)
         self.logger.addHandler(file_handler)
 
-        self.logger.warning('Program start')
         self.logger.info('Logging is alive')
 
 

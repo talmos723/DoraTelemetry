@@ -1,7 +1,7 @@
 from dataholders.DataHolder import DataHolder
 
 
-def build_dataholders(recipt:dict):
+def build_dataholders(recipt: dict):
     dataholders = {}
     for rec in recipt["plotting"]:
         if rec["subtopic"] not in dataholders.keys():

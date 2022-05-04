@@ -4,20 +4,24 @@ import tkinter
 import tkinter.messagebox
 from tkinter import ttk
 
-from mqtt.MqttListener import MqttListener
+from communication import ComDirection
+from communication.ComMenu import ComSystem
+from mqttModul.MqttListener import MqttListener
+from mqttModul.MqttSender import MqttSender
 from settings.init_settings import mqttInit, mqttSave
 
 
 class MqttMenu:
-    def __init__(self, comSys, dataholder):
+
+
+    def __init__(self, comDirection: ComDirection.Dir):
         self.logger = logging.getLogger('robotlog')
+
+        self.comDirection = comDirection
 
         self.comDetails = tkinter.StringVar()
         self.win = None
         self.dataFrame = None
-
-        self.comSys = comSys
-        self.dataholder = dataholder
 
         self.saved = []
         files = os.listdir("./settings/mqtt")
@@ -58,6 +62,8 @@ class MqttMenu:
 
             if choice == "New":
                 self.entries[row] = tkinter.Entry(self.dataFrame)
+                if key == "port":
+                    self.entries[row].insert(tkinter.END, "1883")
                 self.entries[row].grid(row=row, column=2, sticky=tkinter.W)
             else:
                 if key == "password":
@@ -104,7 +110,10 @@ class MqttMenu:
             self.comDetails.set(self.entries[0].get())
 
         try:
-            self.comSys.newCom(MqttListener(self.dataholder, self.comDetails.get()))
+            if self.comDirection is ComDirection.Dir.IN:
+                ComSystem.ComSystem.getInstance().newReciever(MqttListener(self.comDetails.get()))
+            else:
+                ComSystem.ComSystem.getInstance().newSender(MqttSender(self.comDetails.get()))
             self.win.destroy()
         except Exception as e:
             self.logger.warning(f"MQTT connection error!")

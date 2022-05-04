@@ -1,5 +1,5 @@
 class LineDiagram():
-    def __init__(self, subplot, dataholder, rec:dict):
+    def __init__(self, subplot, dataholder, rec: dict):
         self.subplot = subplot
         self.dataholder = dataholder
         self.rec = rec

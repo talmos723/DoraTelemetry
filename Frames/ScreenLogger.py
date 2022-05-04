@@ -7,7 +7,7 @@ import numpy
 
 
 class ScreenLogger(tkinter.Frame):
-    def __init__(self, parent, app_level=logging.INFO, robot_level=logging.DEBUG, fmt=None, visible_line_num=10, max_line_num=100, update_ms=200, *args, **kwargs):
+    def __init__(self, parent, app_level=logging.DEBUG, robot_level=logging.DEBUG, fmt=None, visible_line_num=10, max_line_num=100, update_ms=200, *args, **kwargs):
         tkinter.Frame.__init__(self, parent, *args, **kwargs)
 
         self.logger = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ class ScreenLogger(tkinter.Frame):
         choices = ["Debug", "Info", "Warning", "Error", "Critical"]
         self.dd_app_level = tkinter.OptionMenu(self.fr_level_select, self.ddvar_app_level, *choices, command=self.on_app_level_selection_changed)
         self.dd_app_level.config(width=10)
-        self.ddvar_app_level.set(choices[1])    # TODO: change to given parameter
+        self.ddvar_app_level.set(choices[0])    # TODO: change to given parameter
         self.lb_robot_level = tkinter.Label(self.fr_level_select, text='Log view robot level:')
         self.ddvar_robot_level = tkinter.StringVar(self)
         self.dd_robot_level = tkinter.OptionMenu(self.fr_level_select, self.ddvar_robot_level, *choices, command=self.on_robot_level_selection_changed)
