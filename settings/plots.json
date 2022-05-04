@@ -24,11 +24,11 @@
        "subtopic": "esp8266"
      },
      {
-       "name": "Facing",
-       "ylim": [0,10],
-       "type": "compass",
+       "name": "SoilMoisture",
+       "ylim": [0,100],
+       "type": "line",
        "sample_num": 10,
-       "subtopic": "facing"
+       "subtopic": "esp8266"
      }
 ]
 }

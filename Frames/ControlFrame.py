@@ -1,6 +1,6 @@
 import tkinter
-from tkinter import ttk
 
+from Frames.ControlPanel import ControlPanel
 from Frames.ScreenLogger import ScreenLogger
 
 
@@ -17,5 +17,5 @@ class ControlFrame(tkinter.Frame):
         self.log = ScreenLogger(self.map_log)
         self.log.place(relheight=0.2, rely=0.8, relwidth=1)
 
-        self.controls = tkinter.Frame(self)
+        self.controls = ControlPanel(self)
         self.controls.place(relheight=1, relwidth=0.2, relx=0.8)

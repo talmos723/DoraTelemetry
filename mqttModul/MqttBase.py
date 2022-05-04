@@ -1,17 +1,22 @@
-import abc
+import logging
 
 import paho.mqtt.client as mqtt
-from communication.ComModul import ComModul
+from communication.ComBase import ComBase
 
 
-class MqttClient(ComModul):
+class MqttBase(ComBase):
     def __init__(self, mqttDatas:dict, name, shouldSubscirbe=True):
+
+        self.logger = logging.getLogger('robotlog')
+
         self.name = name
         self.data = mqttDatas
 
         self.client = self.connect()
         if shouldSubscirbe:
             self.subscribe()
+
+        self.running = False
 
     def connect(self):
         client = mqtt.Client(self.name)
@@ -23,10 +28,18 @@ class MqttClient(ComModul):
     def subscribe(self):
         self.client.subscribe(self.data["topic"])
 
-    def getClient(self):
-        return self.client
-
-    @abc.abstractmethod
     def on_connect(self, client, userdata, flags, rc):
-        pass
+        if rc == 0:
+            self.logger.info("Connected to MQTT Broker!")
+        else:
+            self.logger.warning("Failed to connect to MQTT Broker, return code %d\n", rc)
 
+    def run(self):
+        if not self.running:
+            self.logger.info("-------MQTT BASE STARTED-------")
+            self.running = True
+
+    def stop(self):
+        if self.running:
+            self.logger.info("-------MQTT BASE STOPPED-------")
+            self.running = False
